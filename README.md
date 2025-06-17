@@ -24,5 +24,9 @@ You'll notice, too, that there are three number fields at the top. That's so you
 The colours may strike you as odd, but everything except the background colour is from the C-64 palette... or as close as I could get with current digital colour technology.
 
 To run:
-- install Python, PySide6, icecream (used only for debugging, so feel free to comment all those ic() lines out) dataclasses? (is that part of the standard install for Python?),
+- install:
+-   Python,
+-   PySide6,
+-   icecream (used only for debugging, so feel free to comment all those ic() lines out),
+-   dataclasses? (is that part of the standard install for Python?),
 - type: python main.py
