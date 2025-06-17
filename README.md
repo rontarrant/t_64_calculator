@@ -18,5 +18,6 @@ What it can do:
 - and it handles:
 - signed numbers, and
 - unsigned numbers.
+
 You'll notice, too, that there are three number fields at the top. That's so you can see your work as you work. I originally designed it this way so I could see if binary  logic operations worked properly, but left it because... well, I think it's kind of neat.
 The colours may strike you as odd, but everything except the background colour is from the C-64 palette... or as close as I could get with current digital colour technology.
