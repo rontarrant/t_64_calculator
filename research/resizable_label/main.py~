@@ -1,0 +1,23 @@
+from PySide6.QtWidgets import QApplication, QMainWindow
+import sys
+from resizable_label import ResizableLabel
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        properties = {
+            "width": 200,
+            "height": 50,
+            "font_size": 12,
+            "font_factor": 0.1
+        }
+        label = ResizableLabel("Resizable Text", properties, self)
+        label.setGeometry(50, 50, 300, 100)  # Initial size
+        self.setCentralWidget(label)
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    window = MainWindow()
+    window.resize(400, 200)
+    window.show()
+    sys.exit(app.exec())

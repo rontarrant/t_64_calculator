@@ -1,0 +1,32 @@
+Snapshot 04
+- removed redundant paintEvent() methods from all button classes that are children of OneLineButton and TwoLineButton.
+- DEC button is rendered as active
+- HEX and BIN buttons are rendered as inactive
+- all HexadecimalButton instances (A, B, C, D, E, and F) are rendered as inactive
+
+Snapshot 05
+- number system buttons are now mutually exclusive
+- bit width buttons are also mutually exclusive
+- number system buttons now use active/inactive palettes for all relevant buttons for each number system
+
+Snapshot 06
+- we now pass main_window in all callback signatures
+- the "dot" button now uses the proper active/inactive palettes in BIN, DEC, and HEX modes
+
+Snapshot 07
+- all digit buttons are properly enabled or disabled on start-up as well as in BIN, HEX, or DEC modes
+
+Snapshot 08
+- removed redundancies in main.py, MainWindow::_create_button_grid()
+- got rid of extraneous classes in analog_buttons.py
+- consolidated callbacks for number system buttons into a single callback
+- consolidated callbacks for the bit width buttons into a single callback
+
+Snapshot 09:
+- added QLineEdit input widgets
+- added preliminary scaling mechanism
+- preliminary digit button callback amalgamation
+
+Snapshot 10:
+- removed preliminary digit button callback amalgamation
+- added new digit button callback amalgamation (works!)

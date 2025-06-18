@@ -1,0 +1,49 @@
+Snapshot 04
+- removed redundant paintEvent() methods from all button classes that are children of OneLineButton and TwoLineButton.
+- DEC button is rendered as active
+- HEX and BIN buttons are rendered as inactive
+- all HexadecimalButton instances (A, B, C, D, E, and F) are rendered as inactive
+
+Snapshot 05
+- number system buttons are now mutually exclusive
+- bit width buttons are also mutually exclusive
+- number system buttons now use active/inactive palettes for all relevant buttons for each number system
+
+Snapshot 06
+- we now pass main_window in all callback signatures
+- the "dot" button now uses the proper active/inactive palettes in BIN, DEC, and HEX modes
+
+Snapshot 07
+- all digit buttons are properly enabled or disabled on start-up as well as in BIN, HEX, or DEC modes
+
+Snapshot 08
+- removed redundancies in main.py, MainWindow::_create_button_grid()
+- got rid of extraneous classes in analog_buttons.py
+- consolidated callbacks for number system buttons into a single callback
+- consolidated callbacks for the bit width buttons into a single callback
+
+Snapshot 09:
+- added QLineEdit input widgets
+- added preliminary scaling mechanism
+- preliminary digit button callback amalgamation
+
+Snapshot 10:
+- removed preliminary digit button callback amalgamation
+- added new digit button callback amalgamation (works!)
+
+Snapshot 11:
+-removed scaling factor mechanism (didn't work)
+- increased width of Equals button to match those above it
+- changed name of digit button callback to insert_digit
+- amalgamated math callbacks to set_math_operation
+- amalgamated edit callbacks to edit_operation
+- refactored handle_numsys_change and amalgamated _set_number_system()
+- refactored handle_bitwidth_change and amalgamated _set_bitwidth()
+- refactored toggle_signed
+- removed insert_xxx_bracket() functions
+- removed the last of the DPI and scaling code (didn't work)
+- reworked _create_button_grid() to handle all button types/groups
+- reorganized code that adds final row of buttons (Equals and About)
+- added proxy callbacks for the rest of the button types that hadn't yet been handled
+- renamed all proxy callbacks so they're identified as proxies
+

@@ -1,0 +1,151 @@
+Snapshot 04
+- removed redundant paintEvent() methods from all button classes that are children of OneLineButton and TwoLineButton.
+- DEC button is rendered as active
+- HEX and BIN buttons are rendered as inactive
+- all HexadecimalButton instances (A, B, C, D, E, and F) are rendered as inactive
+
+Snapshot 05
+- number system buttons are now mutually exclusive
+- bit width buttons are also mutually exclusive
+- number system buttons now use active/inactive palettes for all relevant buttons for each number system
+
+Snapshot 06
+- we now pass main_window in all callback signatures
+- the "dot" button now uses the proper active/inactive palettes in BIN, DEC, and HEX modes
+
+Snapshot 07
+- all digit buttons are properly enabled or disabled on start-up as well as in BIN, HEX, or DEC modes
+
+Snapshot 08
+- removed redundancies in main.py, MainWindow::_create_button_grid()
+- got rid of extraneous classes in analog_buttons.py
+- consolidated callbacks for number system buttons into a single callback
+- consolidated callbacks for the bit width buttons into a single callback
+
+Snapshot 09:
+- added QLineEdit input widgets
+- added preliminary scaling mechanism
+- preliminary digit button callback amalgamation
+
+Snapshot 10:
+- removed preliminary digit button callback amalgamation
+- added new digit button callback amalgamation (works!)
+
+Snapshot 11:
+-removed scaling factor mechanism (didn't work)
+- increased width of Equals button to match those above it
+- changed name of digit button callback to insert_digit
+- amalgamated math callbacks to set_math_operation
+- amalgamated edit callbacks to edit_operation
+- refactored handle_numsys_change and amalgamated _set_number_system()
+- refactored handle_bitwidth_change and amalgamated _set_bitwidth()
+- refactored toggle_signed
+- removed insert_xxx_bracket() functions
+- removed the last of the DPI and scaling code (didn't work)
+- reworked _create_button_grid() to handle all button types/groups
+- reorganized code that adds final row of buttons (Equals and About)
+- added proxy callbacks for the rest of the button types that hadn't yet been handled
+- renamed all proxy callbacks so they're identified as proxies
+
+Snapshot 12, 13, 14:
+- these are partial snapshots and therefore not runnable
+- first steps toward resizeable buttons and text
+
+Snapshot 15:
+- fully resizable buttons,
+- fully resizable button text
+
+Snapshot 16:
+- refactored callbacks.py -> handle_bitwidth_change to use just the label to find the active button
+
+Snapshot 17:
+- added ResizableLineEdit class
+- added AnalogLineEdit class based on ResizableLineEdit
+- fully-resizable UI, including inputs
+
+Snapshot 18:
+- refactored all assignments to specs to use simpler syntax
+- found out why the ResizableLineEdit font spontaneously halfed in size (there was a stray
+  font_factor)
+
+Snapshot 19:
+- tweaked colours for AnalogLineEdit class
+- made a note about predefined C64Palette colours not working in a PySide6 style sheet
+- found a way to do Allman curlies for dictionaries
+- removed print statements not used for in-file tests
+
+Snapshot 20:
+- turns out the resizing wasn't working the way I'd planned. I don't know how it went off
+  course, so I had the AI bots take another stab. This is the first step toward a fully-
+  resizable UI. This version does resize everything, but it doesn't respect the initial dimensions laid out in button_specs.py.
+- This is only a half-step toward the final design.
+
+Snapshot 21:
+- closer to a fully-resizable UI. Now all the fonts stay within the button tops
+- the LineEdit's have too much padding on the left, but I may have to live with that.
+
+Snapshot 22:
+- not a real snapshot
+- can't get the alignment sorted out between the line edit widgets, the equals button, and
+  the rest of the buttons, so in the next interation, I'll be reverting to Snapshot 19.
+- This also means giving up on the resizable UI, if I have to choose, aesthetics win over
+  resizability.
+
+Snapshot 23:
+- back to real snapshots
+- solved the QLineEdit alignment problem by putting a fake LineEdit on a QLabel which gives
+  more control over placement and alignment than a QLineEdit
+
+Snapshot 23a:
+- not a true snapshot, just a safety in case things get worse
+- the ResizableLabel resizes, but the font isn't changing size in proportion to the window
+  which keeps the label itself from resizing properly
+- button faces resize, but the text doesn't
+
+Snapshot 24:
+- moved all UI dimensions to button_specs.py
+- rewrote all specs so the entire UI can be scaled by changing the a single number,
+  the scale_factor (see button_specs.py)
+
+Snapshot 25:
+- added colour change for Signed/Unsigned button state
+
+Snapshot 26:
+- added state flags to indicate various states of the current operation:
+  - the numbers are signed or unsigned,
+  - the number system,
+  - the bit width of the numbers,
+  - the current math or logic operation, and
+  - whether the logic operation involves only one number.
+- rewrote handle_numsys_change() to set the global variable numsys_state
+- rewrote handle_bitwidth_change() to set the global variable bitwidth_state
+- rewrote set_math_operation() to:
+  - set the global variables:
+    - operation_flag
+    - one_number_op
+  - call do_one_number_operation() when appropriate
+- rewrote toggle_signed() to:
+  - set the global variable: signed_state
+  - change the colours of the Signed/Unsigned button
+- rewrote print() statements so they don't all say "Inserting 0"
+- rewrote do_equals():
+  - so it can tell if there's a current operation to do
+  - give it access to all global flags except one_number_op
+
+Snapshot 27:
+- moved logic function files into main directory
+- added global variables to callbacks.py for input labels
+- added register_labels() function (also in callbacks.py)
+  - registers all labels that can receive digits, results, and math/logic symbols
+  - sets the current_label to first_input_label (default on start-up)
+- added functionality to insert_digit() so the digits go into the current_label
+- added functionality to edit_operation() for backspace and clear buttons
+- added a call to register_labels() in MainWindow::__init__()
+- renamed input widgets and pointers to input widgets for clarity
+
+Snapshot 28:
+- added expand policies for all widgets,
+- added setFocus call for first_input so it's ready to go
+- added logic for one-number operations
+- added size_report() in labels.py for debugging purposes
+

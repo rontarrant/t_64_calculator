@@ -1,0 +1,5 @@
+Snapshot 04
+- removed redundant paintEvent() methods from all button classes that are children of OneLineButton and TwoLineButton.
+- DEC button is rendered as active
+- HEX and BIN buttons are rendered as inactive
+- all HexadecimalButton instances (A, B, C, D, E, and F) are rendered as inactive

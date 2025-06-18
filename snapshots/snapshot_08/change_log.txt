@@ -1,0 +1,6 @@
+Snapshot 08
+- removed redundancies in main.py, MainWindow::_create_button_grid()
+- got rid of extraneous classes in analog_buttons.py
+- consolidated callbacks for number system buttons into a single callback
+- consolidated callbacks for the bit width buttons into a single callback
+

@@ -1,0 +1,217 @@
+def set_binary_number_system(main_window):
+	print("\tSwitching to: binary...")
+	if "bin" in main_window.buttons:
+		main_window.buttons["bin"].set_active(True)
+		main_window.active_radio_buttons["numsys"] = main_window.buttons["bin"]
+	if "dec" in main_window.buttons:
+		main_window.buttons["dec"].set_active(False)
+	if "hex" in main_window.buttons:
+		main_window.buttons["hex"].set_active(False)
+	_update_numsys_button_states(main_window)
+	_update_hex_digit_button_states(main_window)
+
+def set_decimal_number_system(main_window):
+	print("\tSwitching to: decimal...")
+	if "bin" in main_window.buttons:
+		main_window.buttons["bin"].set_active(False)
+	if "dec" in main_window.buttons:
+		main_window.buttons["dec"].set_active(True)
+		main_window.active_radio_buttons["numsys"] = main_window.buttons["dec"]
+	if "hex" in main_window.buttons:
+		main_window.buttons["hex"].set_active(False)
+	_update_numsys_button_states(main_window)
+	_update_hex_digit_button_states(main_window)
+
+def set_hexadecimal_number_system(main_window):
+	print("\tSwitching to: hexadecimal...")
+	if "bin" in main_window.buttons:
+		main_window.buttons["bin"].set_active(False)
+	if "dec" in main_window.buttons:
+		main_window.buttons["dec"].set_active(False)
+	if "hex" in main_window.buttons:
+		main_window.buttons["hex"].set_active(True)
+		main_window.active_radio_buttons["numsys"] = main_window.buttons["hex"]
+	_update_numsys_button_states(main_window)
+	_update_hex_digit_button_states(main_window)
+
+def _update_numsys_button_states(main_window):
+	if "bin" in main_window.buttons:
+		main_window.buttons["bin"].update()
+	if "dec" in main_window.buttons:
+		main_window.buttons["dec"].update()
+	if "hex" in main_window.buttons:
+		main_window.buttons["hex"].update()
+
+def _update_hex_digit_button_states(main_window):
+	hex_digit_ids = ["a", "b", "c", "d", "e", "f"]
+	decimal_digit_ids = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+	active_numsys = main_window.active_radio_buttons["numsys"]
+
+	# Handle hexadecimal digits
+	is_hex_active = False
+	if active_numsys and active_numsys.properties.get("label") == "HEX":
+		is_hex_active = True
+	for button_id in hex_digit_ids:
+		if button_id in main_window.buttons:
+			main_window.buttons[button_id].set_active(is_hex_active)
+			main_window.buttons[button_id].update()
+
+	# Handle decimal digits
+	enable_all_decimal = False
+	if active_numsys and (active_numsys.properties.get("label") == "DEC" or active_numsys.properties.get("label") == "HEX"):
+		enable_all_decimal = True
+	elif active_numsys and active_numsys.properties.get("label") == "BIN":
+		# Only enable '0' and '1'
+		for button_id in decimal_digit_ids:
+			if button_id in main_window.buttons:
+				main_window.buttons[button_id].set_active(button_id == "0" or button_id == "1")
+				main_window.buttons[button_id].update()
+		return # Exit here, as we've handled the binary case
+	elif not active_numsys:
+		enable_all_decimal = True # Enable if no number system is selected
+
+	if enable_all_decimal:
+		for button_id in decimal_digit_ids:
+			if button_id in main_window.buttons:
+				main_window.buttons[button_id].set_active(True)
+				main_window.buttons[button_id].update()
+
+def set_8_bit_width(main_window):
+	print("\tSwitching to: 8-bit...")
+	if "bit_8" in main_window.buttons:
+		main_window.buttons["bit_8"].set_active(True)
+	if "bit_16" in main_window.buttons:
+		main_window.buttons["bit_16"].set_active(False)
+	if "bit_32" in main_window.buttons:
+		main_window.buttons["bit_32"].set_active(False)
+	_update_bitwidth_button_states(main_window)
+
+def set_16_bit_width(main_window):
+	print("\tSwitching to: 16-bit...")
+	if "bit_8" in main_window.buttons:
+		main_window.buttons["bit_8"].set_active(False)
+	if "bit_16" in main_window.buttons:
+		main_window.buttons["bit_16"].set_active(True)
+	if "bit_32" in main_window.buttons:
+		main_window.buttons["bit_32"].set_active(False)
+	_update_bitwidth_button_states(main_window)
+
+def set_32_bit_width(main_window):
+	print("\tSwitching to: 32-bit...")
+	if "bit_8" in main_window.buttons:
+		main_window.buttons["bit_8"].set_active(False)
+	if "bit_16" in main_window.buttons:
+		main_window.buttons["bit_16"].set_active(False)
+	if "bit_32" in main_window.buttons:
+		main_window.buttons["bit_32"].set_active(True)
+	_update_bitwidth_button_states(main_window)
+
+def _update_bitwidth_button_states(main_window):
+	if "bit_8" in main_window.buttons:
+		main_window.buttons["bit_8"].update()
+	if "bit_16" in main_window.buttons:
+		main_window.buttons["bit_16"].update()
+	if "bit_32" in main_window.buttons:
+		main_window.buttons["bit_32"].update()
+
+def insert_0():
+	print("\tInserting 0...")
+
+def insert_1():
+	print("\tInserting 1...")
+
+def insert_2():
+	print("\tInserting 2...")
+
+def insert_3():
+	print("\tInserting 3...")
+
+def insert_4():
+	print("\tInserting 4...")
+
+def insert_5():
+	print("\tInserting 5...")
+
+def insert_6():
+	print("\tInserting 6...")
+
+def insert_7():
+	print("\tInserting 7...")
+
+def insert_8():
+	print("\tInserting 8...")
+
+def insert_9():
+	print("\tInserting 9...")
+
+def insert_a():
+	print("\tInserting A...")
+
+def insert_b():
+	print("\tInserting B...")
+
+def insert_c():
+	print("\tInserting C...")
+
+def insert_d():
+	print("\tInserting D...")
+
+def insert_e():
+	print("\tInserting E...")
+
+def insert_f():
+	print("\tInserting F...")
+
+def about():
+	print("\tShowing about dialog...")
+
+def toggle_signed():
+	print("\tChanging the signed/unsigned state...")
+
+def insert_division():
+	print("\tInserting a divide sign...")
+
+def insert_multiply():
+	print("\tInserting a multiply sign...")
+
+def insert_subtract():
+	print("\tInserting a subtract sign...")
+
+def insert_addition():
+	print("\tInserting an addition sign...")
+
+def insert_dot():
+	print("\tInserting a dot...")
+
+def insert_left_bracket():
+	print("\tInserting a left bracket...")
+
+def insert_right_bracket():
+	print("\tInserting a right bracket..")
+
+def clear_display():
+	print("\tClearing the input")
+
+def do_backspace():
+	print("\tBackspacing...")
+
+def do_and():
+	print("\tperforming AND...")
+
+def do_or():
+	print("\tperforming OR...")
+	
+def do_xor():
+	print("\tperforming XOR...")
+	
+def do_not():
+	print("\tperforming NOT...")
+	
+def do_equals(): # equals button
+	print("\tDoing equals...")
+
+def do_shift_left():
+	print("\tDoing shift left <<")
+
+def do_shift_right():
+	print("\tDoing shift right >>")

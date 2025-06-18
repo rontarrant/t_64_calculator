@@ -1,0 +1,84 @@
+import sys
+
+from PySide6.QtWidgets import  (
+    QApplication,
+    QWidget,
+    QPushButton,
+    QVBoxLayout
+)
+
+from PySide6.QtGui import (
+    QPainter,
+    QPixmap,
+    QColor,
+    QImage
+)
+
+from PySide6.QtCore import (
+    Qt,
+    QPoint,
+    QSize
+)
+
+import button_data
+
+class AnalogButton(QPushButton):
+    def __init__(self, image_path, parent = None):
+        super().__init__(parent)
+        self.image = QPixmap(image_path)
+        self.pressed_offset = QPoint(3, 3)
+        self.current_offset = QPoint(0, 0)
+        self.is_pressed = False
+
+        # Calculate the size correctly
+        size = self.image.size()
+        print("Image Size: ", size)
+        size.setWidth(size.width() + self.pressed_offset.x() * 2)
+        size.setHeight(size.height() + self.pressed_offset.y() * 2)
+        self.setFixedSize(size)
+        print("Fixed size: ", size)
+
+    def mousePressEvent(self, event):
+        super().mousePressEvent(event)
+        self.is_pressed = True
+        self.current_offset = self.pressed_offset
+        self.update()
+
+    def mouseReleaseEvent(self, event):
+        super().mouseReleaseEvent(event)
+        self.is_pressed = False
+        self.current_offset = QPoint(0, 0)
+        self.update()
+
+    def paintEvent(self, event):
+        painter = QPainter(self)
+        painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+
+        # Draw drop shadow (manual)
+        if not self.is_pressed:
+            shadow_image = self.image.toImage()
+            for x in range(shadow_image.width()):
+                for y in range(shadow_image.height()):
+                    color = shadow_image.pixelColor(x, y)
+                    
+                    if color.alpha() > 0:
+                        shadow_image.setPixelColor(x, y, QColor(0, 0, 0, color.alpha() // 3))
+
+            painter.setOpacity(0.5)
+            painter.drawImage(self.pressed_offset, shadow_image)
+            painter.setOpacity(1.0)
+
+        # Draw image
+        painter.drawPixmap(self.current_offset, self.image)
+
+        painter.end()
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    window = QWidget()
+    layout = QVBoxLayout(window)
+    button = AnalogButton("images/digit_0.png")  # Replace with your image path
+    layout.addWidget(button)
+    window.show()
+    sys.exit(app.exec())
+    

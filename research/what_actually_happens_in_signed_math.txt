@@ -1,0 +1,100 @@
+click: 7
+
+    content:   , digit to add:  7
+
+click: 8
+
+    content:  7 , digit to add:  8
+
+click: +/-
+
+    ic| 'sign_mode_toggle() start'
+    signed_unsigned_mode:  Unsigned
+    sign_set_state:  Positive
+    numsys_state:  dec
+    bitwidth_state:  8
+    operation_flag: None
+    one_number_op: False
+
+    ic| 'sign_mode_toggle() end'
+    signed_unsigned_mode:  Signed
+    sign_set_state:  Positive
+    numsys_state:  dec
+    bitwidth_state:  8
+    operation_flag: None
+    one_number_op: False
+
+click: + (to make it: -)
+
+    ic| 'set_sign() start'
+    ic| sign_set_state: False
+        signed_unsigned_mode: True
+        current_label.text(): '78'
+        clicked_button._text: '+'
+    signed_unsigned_mode:  Signed
+    sign_set_state:  Positive
+    numsys_state:  dec
+    bitwidth_state:  8
+    operation_flag: None
+    one_number_op: False
+
+    ic| 'prepend -'
+    ic| 'set_sign() end'
+    ic| sign_set_state: True
+        signed_unsigned_mode: True
+        current_label.text(): '-78'
+        clicked_button._text: '-'
+    signed_unsigned_mode:  Signed
+    sign_set_state:  Negative
+    numsys_state:  dec
+    bitwidth_state:  8
+    operation_flag: None
+    one_number_op: False
+
+click: + (math addition) (sign button changes to +)
+
+    ic| 'set_math_operation() start'
+    signed_unsigned_mode:  Signed
+    sign_set_state:  Negative
+    numsys_state:  dec
+    bitwidth_state:  8
+    operation_flag: None
+    one_number_op: False
+
+    ic| 'set_sign() start'
+    ic| sign_set_state: True
+        signed_unsigned_mode: True
+        current_label.text(): ''
+        clicked_button._text: '-'
+    signed_unsigned_mode:  Signed
+    sign_set_state:  Negative
+    numsys_state:  dec
+    bitwidth_state:  8
+    operation_flag: +
+    one_number_op: False
+
+    ic| 'prepend -'
+    ic| 'set_sign() end'
+    ic| sign_set_state: True
+        signed_unsigned_mode: True
+        current_label.text(): '-'
+        clicked_button._text: '-'
+    signed_unsigned_mode:  Signed
+    sign_set_state:  Negative
+    numsys_state:  dec
+    bitwidth_state:  8
+    operation_flag: +
+    one_number_op: False
+
+    ic| 'set_math_operation() end'
+    signed_unsigned_mode:  Signed
+    sign_set_state:  Negative
+    numsys_state:  dec
+    bitwidth_state:  8
+    operation_flag: +
+    one_number_op: False
+
+click: 8 (second number) (but it adds: -8)
+
+    content:  - , digit to add:  8
+

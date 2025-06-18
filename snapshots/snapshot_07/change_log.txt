@@ -1,0 +1,2 @@
+Snapshot 07
+- all digit buttons are properly enabled or disabled on start-up as well as in BIN, HEX, or DEC modes

@@ -1,0 +1,12 @@
+Snapshot 05
+- number system buttons are now mutually exclusive
+- bit width buttons are also mutually exclusive
+- number system buttons now use active/inactive palettes for all relevant buttons for each number system
+
+TODO
+- disable HexadecimalButton's when in DEC or BIN mode
+- disable DecimalButton's when in BIN mode
+- re-enable HexadecimalButton and DecimalButton's when in HEX mode
+- re-enable DecimalButton's when in DEC mode
+- add QLineEdit widgets
+- add math functions
