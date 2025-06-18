@@ -30,7 +30,7 @@ def bitwise_or(a, b, bit_width):
 
     mask = (1 << bit_width) - 1
     result = (a & mask) | (b & mask)
-    return result
+    return result, True
 
 def bitwise_xor(a, b, bit_width):
     """

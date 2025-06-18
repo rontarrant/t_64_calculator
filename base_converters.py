@@ -1,5 +1,3 @@
-from icecream import *
-
 def decimal_to_hexadecimal(decimal_num: int) -> str:
 	"""Converts a decimal number to its hexadecimal representation."""
 	if not isinstance(decimal_num, int):

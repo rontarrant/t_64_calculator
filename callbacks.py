@@ -1,5 +1,4 @@
 import sys
-from icecream import ic
 
 from dialog import *
 from math_functions_signed_bits import *
@@ -34,7 +33,7 @@ def print_state_flags():
 
 	print("")
 
-# input labels for digits, math/logic symbols, and results
+# input labels for all the fun stuff... digits, math/logic symbols, and results
 first_input_label = None
 second_input_label = None
 operation_symbol_label = None
@@ -68,9 +67,6 @@ def handle_numsys_change(main_window):
 
 	old_numsys = numsys_state
 
-	ic("handle_numsys_change() start")
-	print_state_flags()
-
 	# get the new number system
 	if clicked_button:
 		button_label = clicked_button.properties.get("label")
@@ -99,25 +95,19 @@ def handle_numsys_change(main_window):
 
 	numsys_state = numsys
 
-	if first_input_label != "":
+	if first_input_label.text() != '':
 		first_input_label.setText(select_conversion(old_numsys, numsys, first_input_label.text()))
 	
-	if second_input_label != "":
+	if second_input_label.text() != '':
 		second_input_label.setText(select_conversion(old_numsys, numsys, second_input_label.text()))
 
-	if results_output_label != "":
+	if results_output_label.text() != '':
 		results_output_label.setText(select_conversion(old_numsys, numsys, results_output_label.text()))
-
-	#ic("handle_numsys_change() end")
-	#print_state_flags()
 
 
 def handle_bitwidth_change(main_window):
 	global bitwidth_state
 	clicked_button = main_window.sender()
-
-	ic("handle_bitwidth_change() start")
-	print_state_flags()
 
 	if clicked_button:
 		button_label = clicked_button.properties.get('label')
@@ -132,9 +122,6 @@ def handle_bitwidth_change(main_window):
 		button.update()
 	
 	bitwidth_state = button_label
-
-	ic("handle_bitwidth_change() end")
-	print_state_flags()
 
 
 def insert_digit(main_window):
@@ -158,7 +145,6 @@ def insert_digit(main_window):
 
 	# add the current digit to the end of the current label
 	content = current_label.text()
-	#ic("content: ", content, ", digit to add: ", digit_to_add)
 	content += digit_to_add
 	current_label.setText(content)
 
@@ -166,9 +152,6 @@ def insert_digit(main_window):
 def do_one_number_operation(op_type):
 	global first_input_label
 	global results_output_label
-
-	#ic("do_one_number_operation() start")
-	#print_state_flags()
 
 	number = int(first_input_label.text())
 
@@ -183,9 +166,6 @@ def do_one_number_operation(op_type):
 	except Exception as e:
 		print(f"Error during one-operand operation {op_type}: {e}", file = sys.stderr)
 		current_label = 0
-
-	#ic("do_one_number_operation() end")
-	#print_state_flags()
 
 
 def do_two_number_operation(op_type):
@@ -205,9 +185,6 @@ def set_math_operation(main_window):
 	global signed_mode
 	global sign_set_state
 	sign_set_button = main_window.sign_set_button
-
-	#ic("set_math_operation() start")
-	#print_state_flags()
 
 	clicked_button = main_window.sender()
 
@@ -235,15 +212,9 @@ def set_math_operation(main_window):
 			sign_set_button._text = sign_set_button.properties["label"]
 			sign_set_button.update()
 
-	#ic("set_math_operation() end")
-	#print_state_flags()
-
 
 def edit_operation(main_window):
 	clicked_button = main_window.sender()
-
-	ic("edit_operation start")
-	print_state_flags()
 
 	if clicked_button:
 		button_label = clicked_button.properties.get("label")
@@ -255,9 +226,6 @@ def edit_operation(main_window):
 		elif button_label == "CLR":
 			current_label.setText("")
 	
-	ic("edit_operation end")
-	print_state_flags()
-
 
 def select_math_function(operation_flag):
 	math_function = None
@@ -317,9 +285,6 @@ def do_equals(main_window): # equals button
 	global results_output_label
 	global remainder_label
 
-	#ic("do_equals start")
-	#print_state_flags()
-
 	if operation_flag != None:
 		bitwidth = int(bitwidth_state)
 		first_number = first_input_label.text()
@@ -369,13 +334,10 @@ def do_equals(main_window): # equals button
 	operation_flag = None
 	current_label = first_input_label
 
-	#ic("do_equals end")
-	#print_state_flags()
 
 def about(main_window):
 	clicked_button = main_window.sender()
 	button_label = clicked_button.properties.get("label")
-	ic(button_label)
 
 	if button_label == "T-64":
 		dialog = T64Dialog(main_window)
@@ -392,11 +354,6 @@ def set_sign(main_window):
 	# get the sign-switch button
 	clicked_button = main_window.sign_set_button
 
-	#ic("set_sign() start")
-	#ic(sign_set_state, signed_mode, current_label.text(), clicked_button._text)
-	#print_state_flags()
-
-
 	# signed_mode is set (below) by the toggle-sign button
 	if signed_mode == True:
 		# what's showing on the label?
@@ -409,7 +366,6 @@ def set_sign(main_window):
 			sign_set_state = False
 		else:
 			# prepend a minus sign
-			ic("prepend -")
 			number = "-" + current_label.text()
 			# change the button text
 			clicked_button._text = clicked_button.properties["alt_label"]
@@ -422,19 +378,12 @@ def set_sign(main_window):
 	# change the active state of the switch-sign button
 	clicked_button.set_active(signed_mode)
 
-	#ic("set_sign() end")
-	#ic(sign_set_state, signed_mode, current_label.text(), clicked_button._text)
-	#print_state_flags()
-
 
 def sign_mode_toggle(main_window):
 	global signed_mode
 	global current_label
 	clicked_button = main_window.sender()
 	sign_set_button = main_window.sign_set_button
-
-	#ic("sign_mode_toggle() start")
-	#print_state_flags()
 
 	# if we're in unsigned mode, go to signed mode
 	if signed_mode == False:
@@ -461,6 +410,3 @@ def sign_mode_toggle(main_window):
 	sign_set_button.set_active(signed_mode)
 	sign_set_button.setEnabled(signed_mode)
 	sign_set_button.update()
-
-	#ic("sign_mode_toggle() end")
-	#print_state_flags()

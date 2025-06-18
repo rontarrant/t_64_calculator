@@ -27,6 +27,4 @@ To run:
 - install:
   - Python,
   - PySide6,
-  - icecream (used only for debugging, so feel free to comment all those ic() lines out),
-  - dataclasses? (is that part of the standard install for Python?),
 - type: python main.py
