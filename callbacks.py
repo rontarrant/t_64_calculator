@@ -33,7 +33,10 @@ def print_state_flags():
 
 	print("")
 
-# input labels for all the fun stuff... digits, math/logic symbols, and results
+# input labels for all the fun stuff...
+# digits,
+# math/logic symbols, and
+# results
 first_input_label = None
 second_input_label = None
 operation_symbol_label = None
