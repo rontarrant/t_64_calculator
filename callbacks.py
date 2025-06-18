@@ -345,8 +345,6 @@ def about(main_window):
 	if button_label == "T-64":
 		dialog = T64Dialog(main_window)
 		dialog.exec()
-		print("\tmain_window: ", main_window, ", button: ", button_label)
-		print("\tShowing about dialog...")
 
 
 def set_sign(main_window):
