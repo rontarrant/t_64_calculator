@@ -288,6 +288,8 @@ def do_equals(main_window): # equals button
 	global results_output_label
 	global remainder_label
 
+	remainder_result = 0
+
 	if operation_flag != None:
 		bitwidth = int(bitwidth_state)
 		first_number = first_input_label.text()
@@ -314,15 +316,15 @@ def do_equals(main_window): # equals button
 			display_result = decimal_to_hexadecimal(int(result[0])).upper()
 		elif numsys_state == "bin":
 			display_result = decimal_to_binary(int(result[0]))
-
-			if operation_flag == "/":
-				remainder_result = decimal_to_binary(int(result[1]))
-
-				# divide by zero? Display "NaN" in results_output_label
-				if result[2] == True:
-					display_result = "NaN"
 		else:
 			display_result = result[0]
+
+		if operation_flag == "/":
+			remainder_result = decimal_to_binary(int(result[1]))
+
+			# divide by zero? Display "NaN" in results_output_label
+			if result[2] == True:
+				display_result = "NaN"
 
 		# show the result
 		results_output_label.setText(str(display_result))
