@@ -97,7 +97,7 @@ def handle_numsys_change(main_window):
 		button.update()
 
 	numsys_state = numsys
-
+	
 	if first_input_label.text() != '':
 		first_input_label.setText(select_conversion(old_numsys, numsys, first_input_label.text()))
 	
@@ -107,6 +107,13 @@ def handle_numsys_change(main_window):
 	if results_output_label.text() != '':
 		results_output_label.setText(select_conversion(old_numsys, numsys, results_output_label.text()))
 
+	if remainder_label.text() != '':
+		# strip off the prefix
+		remainder_string = remainder_label.text()[3:]
+		# convert the remainder
+		remainder_string = select_conversion(old_numsys, numsys, remainder_string)
+		# rebuild the remainder string and replace it
+		remainder_label.setText("R: " + str(remainder_string))
 
 def handle_bitwidth_change(main_window):
 	global bitwidth_state
@@ -314,24 +321,33 @@ def do_equals(main_window): # equals button
 		# if the base is non-decimal, convert back to current base
 		if numsys_state == "hex":
 			display_result = decimal_to_hexadecimal(int(result[0])).upper()
+
+			if operation_flag == "/":
+				remainder_result = decimal_to_hexadecimal(int(result[1]))
 		elif numsys_state == "bin":
 			display_result = decimal_to_binary(int(result[0]))
+
+			if operation_flag == "/":
+				remainder_result = decimal_to_binary(int(result[1]))
+
+				# divide by zero? Display "NaN" in results_output_label
+				if result[2] == True:
+					display_result = "NaN"
 		else:
 			display_result = result[0]
 
-		if operation_flag == "/":
-			remainder_result = decimal_to_binary(int(result[1]))
+			if operation_flag == "/":
+				remainder_result = int(result[1])
 
-			# divide by zero? Display "NaN" in results_output_label
-			if result[2] == True:
-				display_result = "NaN"
 
 		# show the result
 		results_output_label.setText(str(display_result))
 
 		# Is there a remainder? Display it.
-		if operation_flag == "/":
+		if operation_flag == "/" and result[1] > 0:
 			remainder_label.setText("R: " + str(remainder_result))
+		else:
+			pass
 	else:
 		pass
 
